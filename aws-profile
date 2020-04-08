@@ -1,0 +1,14 @@
+function aws-profile() {
+  if [[ -z "${1}" ]]; then
+    profiles=$(grep '\[profile' ~/.aws/config | tr -d '[]' | awk '{print $2}')
+    for profile in $profiles; do
+      if [[ "${profile}" == "${AWS_PROFILE}" ]]; then
+        echo "${profile} *"
+      else
+        echo "${profile}"
+      fi
+    done
+  else
+    export AWS_PROFILE="${1}"
+  fi
+}
