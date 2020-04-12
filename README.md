@@ -14,11 +14,13 @@ are stored in the operating system keychain, or via either AWS SSO or Okta.
 ### Prerequisites
 
 *  [Python 3](https://www.python.org/downloads/) - Required to execute the credential refresher
+*  [boto3](https://aws.amazon.com/sdk-for-python/) - Calls STS to obtain temporary credentials
 *  [AWS CLI version 2](https://aws.amazon.com/cli/) - Used to support getting credentials via AWS SSO
 *  [aws-vault](https://github.com/99designs/aws-vault) - Store credentials in the local operating system keychain
 *  [gimme-aws-creds](https://github.com/Nike-Inc/gimme-aws-creds) - Fetches credentials using Okta
 
 Instructions for each can be found at the corresponding links.
+
 
 ### Installation
 
@@ -50,10 +52,10 @@ depend on the back-end method used to fetch credentials:
    options given (see the `user-profile` in the example below). To load the credentials into
    the operating system keychain, run `aws-vault add <profile-name>` and follow the prompts.
 
-*  For profiles that assume a role via a source profile, store the source profile credentials
-   using `aws-vault` as described above, then add the `source_profile` value to reference them,
-   and the `role_arn` to be assumed. Note that the role must have a trust policy that allows
-   the user in the source profile to assume it. See the `role-profile` example below.
+*  For profiles that assume a role via a source profile, add the `source_profile` value to
+   reference them, and the `role_arn` to be assumed. Note that the role must have a trust policy
+   that allows the user in the source profile to assume it. See the `role-profile` example below.
+   Also ensure the named source profile also has an entry in the config file.
 
 *  For profiles that use AWS SSO, configure the profile per the [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html),
    i.e. with the `sso_start_url`, `sso_region`, `sso_account_id`, and `sso_role_name` fields.
@@ -87,7 +89,6 @@ okta_profile = example
 okta_account_id = 123456789100
 okta_role_name = ExampleRole
 ```
-
 
 #### Okta Configuration
 
