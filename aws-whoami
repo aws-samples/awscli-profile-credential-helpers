@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+
+
+import boto3
+
+
+sts = boto3.client('sts')
+
+
+response = sts.get_caller_identity()
+
+account = response['Account']
+user = response['UserId']
+role = response['Arn']
+
+
+print(f'Account: {account}')
+print(f'User: {user}')
+print(f'Role: {role}')

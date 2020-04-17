@@ -129,6 +129,8 @@ There are two commands provided:
    on every CLI command. Note that if the completion config was installed `aws-profile`
    can do tab-completion when entering a profile name parameter.
 
+*  `aws-whoami` - Prints user/role details that the CLI is currently configured to use.
+
 *  `aws-refresh-credentials [PROFILE_NAME] [PROFILE_NAME] ...` - Automatically fetches
    temporary credentials for the given profiles and populates the credentials file (i.e.
    `~/.aws/credentials`) with the values, so they're available for the AWS CLI and any
