@@ -119,7 +119,7 @@ output_format = json
 
 ### Running
 
-There are two commands provided:
+The following commands are provided:
 
 *  `aws-profile [PROFILE_NAME]` - If run without a parameter, this function parses all
    profile names from the config file and lists them, highlighting the active one (i.e.
