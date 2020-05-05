@@ -8,7 +8,10 @@ if ! grep -q 'function aws-profile' ~/.bash_profile; then
 fi
 
 # Install the credential helper as an executable
-cp aws-whoami aws-refresh-credentials /usr/local/bin/
+cp aws-console /usr/local/bin/
+cp aws-refresh-credentials /usr/local/bin/
+cp aws-whoami /usr/local/bin/
 
 # Finally configure bash completion for the above tools
+cp aws-console-completion.bash /usr/local/etc/bash_completion.d/
 cp aws-profile-completion.bash /usr/local/etc/bash_completion.d/

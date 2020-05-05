@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+
+import json
+import sys
+import webbrowser
+
+import boto3
+import requests
+
+
+try:
+    service_name = sys.argv[1]
+except IndexError:
+    service_name = 'console'
+
+
+federation_url = 'https://signin.aws.amazon.com/federation'
+destination_url = f'https://console.aws.amazon.com/{service_name}'
+
+
+session = boto3.Session()
+session_credentials = session.get_credentials()
+
+credentials = {
+    'sessionId': session_credentials.access_key,
+    'sessionKey': session_credentials.secret_key,
+    'sessionToken': session_credentials.token,
+}
+
+params = {
+    'Action': 'getSigninToken',
+    'SessionDuration': 43200,
+    'Session': json.dumps(credentials),
+}
+
+response = requests.get(federation_url, params=params)
+
+
+params = {
+    'Action': 'login',
+    'Destination': destination_url,
+    'SigninToken': response.json()['SigninToken']
+}
+
+request = requests.Request('GET', federation_url, params=params).prepare()
+
+webbrowser.open(request.url)
