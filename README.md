@@ -131,6 +131,10 @@ The following commands are provided:
 
 *  `aws-whoami` - Prints user/role details that the CLI is currently configured to use.
 
+*  `aws-console [SERVICE_SLUG]`: Opens the AWS console in a browser, automatically logs in
+   to the configured profile, and navigates to the service page indicated by `SERVICE_SLUG`
+   (e.g. `s3`, `ec2`, `iam`, `vpc`; see `aws-console-completion.bash` for all options).
+
 *  `aws-refresh-credentials [PROFILE_NAME] [PROFILE_NAME] ...` - Automatically fetches
    temporary credentials for the given profiles and populates the credentials file (i.e.
    `~/.aws/credentials`) with the values, so they're available for the AWS CLI and any
