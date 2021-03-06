@@ -5,7 +5,8 @@ to switch between multiple AWS profiles while handling credentials in a secure
 fashion.
 
 It current supports acquiring credentials using a source profile whose credentials
-are stored in the operating system keychain, or via either AWS SSO or Okta.
+are stored in the operating system keychain, or via a federated provider such as
+AWS SSO, Azure AD, or Okta.
 
 
 ## Getting Started
@@ -17,6 +18,7 @@ are stored in the operating system keychain, or via either AWS SSO or Okta.
 *  [boto3](https://aws.amazon.com/sdk-for-python/) - Calls STS to obtain temporary credentials
 *  [AWS CLI version 2](https://aws.amazon.com/cli/) - Used to support getting credentials via AWS SSO
 *  [aws-vault](https://github.com/99designs/aws-vault) - Store credentials in the local operating system keychain
+*  [aws-azure-login](https://github.com/sportradar/aws-azure-login) - Fetches credentials using Azure AD
 *  [gimme-aws-creds](https://github.com/Nike-Inc/gimme-aws-creds) - Fetches credentials using Okta
 
 Instructions for each can be found at the corresponding links.
@@ -61,6 +63,15 @@ depend on the back-end method used to fetch credentials:
    i.e. with the `sso_start_url`, `sso_region`, `sso_account_id`, and `sso_role_name` fields.
    See also the `sso-profile` example below.
 
+*  For Azure AD profiles, add `azure_tenant_id`, `azure_app_id_uri`, `azure_default_username`,
+   `azure_default_role_arn`, `azure_default_duration_hours`, and `azure_default_remember_me`
+   fields as shown in the `azure-profile` example. This can be done most easily by simply
+   running `aws-azure-login --configure --profile PROFILE_NAME`. More information on how
+   to obtain these values for your application can be found in the
+   [aws-azure-login](https://github.com/sportradar/aws-azure-login) documentation. Note
+   that if the app URL contains a pound sign (`#`) it needs to be escaped with a backslash
+   in the config file (see the example).
+
 *  For Okta profiles, add `okta_profile`, `okta_account_id`, and `okta_role_name` fields
    as shown in the `okta-profile` example. These values should match what's configured in
    the `gimme-aws-creds` config file stored at `~/.okta_aws_login_config`.
@@ -83,6 +94,14 @@ sso_start_url = https://example-domain.awsapps.com/start
 sso_region = us-west-2
 sso_account_id = 123456789100
 sso_role_name = ExampleRole
+
+[profile azure-profile]
+azure_tenant_id=deadbeef-1234-1234-1234-deadbeef1234
+azure_app_id_uri=https://signin.aws.amazon.com/saml\#1
+azure_default_username=user@example.com
+azure_default_role_arn=arn:aws:iam::123456789100:role/example
+azure_default_duration_hours=1
+azure_default_remember_me=true
 
 [profile okta-profile]
 okta_profile = example
