@@ -14,14 +14,16 @@ AWS SSO, Azure AD, or Okta.
 
 ### Prerequisites
 
-*  [Python 3](https://www.python.org/downloads/) - Required to execute the credential refresher
-*  [boto3](https://aws.amazon.com/sdk-for-python/) - Calls STS to obtain temporary credentials
-*  [AWS CLI version 2](https://aws.amazon.com/cli/) - Used to support getting credentials via AWS SSO
-*  [aws-vault](https://github.com/99designs/aws-vault) - Store credentials in the local operating system keychain
-*  [aws-azure-login](https://github.com/sportradar/aws-azure-login) - Fetches credentials using Azure AD
-*  [gimme-aws-creds](https://github.com/Nike-Inc/gimme-aws-creds) - Fetches credentials using Okta
+The script requires [Python 3](https://www.python.org/downloads/) to execute. Once it
+is setup, install Python package dependencies with `pip3 install -r requirements.txt`.
 
-Instructions for each can be found at the corresponding links.
+The following are optional components and only need to be installed if the corresponding
+functionality is needed. Instructions for each can be found at the corresponding links.
+
+*  [AWS CLI version 2](https://aws.amazon.com/cli/) - Fetches credentials using AWS SSO
+*  [aws-azure-login](https://github.com/sportradar/aws-azure-login) - Fetches credentials using Azure AD
+*  [aws-vault](https://github.com/99designs/aws-vault) - Uses credentials stored in the local operating system keychain
+*  [gimme-aws-creds](https://github.com/Nike-Inc/gimme-aws-creds) - Fetches credentials using Okta
 
 
 ### Installation
